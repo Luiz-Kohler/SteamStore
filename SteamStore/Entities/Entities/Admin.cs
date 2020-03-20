@@ -8,8 +8,8 @@ namespace Entities.Entities
 {
     public class Admin : Entity
     {
-        public string Name { get; set; }
-        public Login Login { get; set; } 
-        public DateTime BornDate { get; set; }
+        public string Name { get; private set; }
+        public Login Login { get; private set; } 
+        public DateTime BornDate { get; private set; }
     }
 }

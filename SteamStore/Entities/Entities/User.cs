@@ -9,16 +9,16 @@ namespace Entities.Entities
     public class User : Entity
     {
         public string Nick { get; private set; }
-        public Login Login { get; set; }
+        public Login Login { get; private set; }
         public DateTime BornDate { get; private set; }
         public decimal Cash { get; private set; }
-        public virtual IList<Item> Items { get; set; }
-        public virtual IList<Sale> Sales { get; set; }
-        public virtual IList<Ad> Ads { get; set; }
-        public virtual IList<Comment> MyComments { get; set; }
-        public virtual IList<Comment> ForMeComments { get; set; }
-        public virtual IList<Friend> Friends { get; set; }
-        public virtual IList<FriendRequest> MyFriendRequest { get; set; }
-        public virtual IList<FriendRequest> ForMeFriendRequest { get; set; }
+        public virtual IReadOnlyCollection<Item> Items { get; private set; }
+        public virtual IReadOnlyCollection<Sale> Sales { get; private set; }
+        public virtual IReadOnlyCollection<Ad> Ads { get; private set; }
+        public virtual IReadOnlyCollection<Comment> MyComments { get; private set; }
+        public virtual IReadOnlyCollection<Comment> ForMeComments { get; private set; }
+        public virtual IReadOnlyCollection<Friend> Friends { get; private set; }
+        public virtual IReadOnlyCollection<FriendRequest> MyFriendRequest { get; private set; }
+        public virtual IReadOnlyCollection<FriendRequest> ForMeFriendRequest { get; private set; }
     }
 }
