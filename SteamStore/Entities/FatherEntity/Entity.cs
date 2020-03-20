@@ -7,12 +7,12 @@ namespace Entities.FatherEntity
 
         public Entity()
         {
-            Id = new Guid();
+            ID = new Guid();
             IsActive = true;
             
         }
 
-        public Guid Id { get; set; }
+        public Guid ID { get; set; }
         public bool IsActive { get; set; }
 
         public void ChangeState(bool state)
