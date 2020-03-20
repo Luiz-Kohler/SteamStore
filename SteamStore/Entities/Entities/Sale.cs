@@ -7,7 +7,11 @@ namespace Entities.Entities
 {
     public class Sale : Entity
     {
-        public Sale(int buyerId, int adId)
+        public Sale()
+        {
+
+        }
+        public Sale(Guid buyerId, Guid adId)
         {
             DateSell = DateTime.UtcNow;
             BuyerId = buyerId;
@@ -15,9 +19,9 @@ namespace Entities.Entities
         }
 
         public DateTime DateSell { get; private set; }
-        public int BuyerId { get; private set; }
+        public Guid BuyerId { get; private set; }
         public virtual User Buyer { get; private set; }
-        public int AdId { get; private set; }
+        public Guid AdId { get; private set; }
         public virtual Ad Ad { get; private set; }
 
         public void GetUserBuyer(User userBuyer)

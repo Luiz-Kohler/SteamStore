@@ -7,7 +7,11 @@ namespace Entities.Entities
 {
     public class Ad : Entity
     {
-        public Ad(decimal price, int itemID, int sellerUserID)
+        public Ad()
+        {
+
+        }
+        public Ad(decimal price, int itemID, Guid sellerUserID)
         {
             Price = price;
             DateAd = DateTime.UtcNow;
@@ -22,9 +26,9 @@ namespace Entities.Entities
         public DateTime DateAd { get; private set; }
         public int ItemID { get; private set; }
         public virtual Item Item { get; private set; }
-        public int SellerUserID { get; private set; }
+        public Guid SellerUserID { get; private set; }
         public virtual User SellerUser { get; private set; }
-        public int? SaleID { get; private set; }
+        public Guid? SaleID { get; private set; }
         public virtual Sale Sale { get; private set; }
         public bool IsSold { get; private set; }
 
@@ -43,7 +47,7 @@ namespace Entities.Entities
             this.Sale = sale;
         }
 
-        public void SellItem(int saleID)
+        public void SellItem(Guid saleID)
         {
             SaleID = saleID;
             IsSold = true;

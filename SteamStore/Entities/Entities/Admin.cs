@@ -8,6 +8,10 @@ namespace Entities.Entities
 {
     public class Admin : Entity
     {
+        public Admin()
+        {
+
+        }
         public Admin(string name, Login login, DateTime bornDate)
         {
             Name = name;

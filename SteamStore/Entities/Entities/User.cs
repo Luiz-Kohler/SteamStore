@@ -19,6 +19,12 @@ namespace Entities.Entities
         private List<FriendRequest> _myFriendRequest;
         private List<FriendRequest> _forMeFriendRequest;
 
+
+        public User()
+        {
+
+        }
+
         public User(string nick, Login login, DateTime bornDate)
         {
             Nick = nick;

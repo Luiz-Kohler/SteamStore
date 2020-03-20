@@ -7,7 +7,12 @@ namespace Entities.Entities
 {
     public class Comment : Entity
     {
-        public Comment(string message, int writterID, int forUserID)
+
+        public Comment()
+        {
+
+        }
+        public Comment(string message, Guid writterID, Guid forUserID)
         {
             Message = message;
             DateTimeComment = DateTime.UtcNow;
@@ -17,9 +22,9 @@ namespace Entities.Entities
 
         public string Message { get; private set; }
         public DateTime DateTimeComment { get; private set; }
-        public int WritterID { get; private set; }
+        public Guid WritterID { get; private set; }
         public virtual User Writter { get; private set; }
-        public int ForUserID { get; private set; }
+        public Guid ForUserID { get; private set; }
         public virtual User ForUser { get; private set; }
 
         public void GetUserWritter(User userWritter)

@@ -7,15 +7,20 @@ namespace Entities.Entities
 {
     public class Friend : Entity
     {
-        public Friend(int userID, int friendUserID)
+
+        public Friend()
+        {
+
+        }
+        public Friend(Guid userID, Guid friendUserID)
         {
             UserID = userID;
             FriendUserID = friendUserID;
         }
 
-        public int UserID { get; private set; }
+        public Guid UserID { get; private set; }
         public User User { get; private set; }
-        public int FriendUserID { get; private set; }
+        public Guid FriendUserID { get; private set; }
         public User FriendUser { get; private set; }
 
         public void GetUser(User user)

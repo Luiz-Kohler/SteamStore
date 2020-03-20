@@ -7,15 +7,20 @@ namespace Entities.Entities
 {
     public class FriendRequest : Entity
     {
-        public FriendRequest(int requestUserID, int forUserID)
+        public FriendRequest()
+        {
+
+        }
+
+        public FriendRequest(Guid requestUserID, Guid forUserID)
         {
             RequestUserID = requestUserID;
             ForUserID = forUserID;
         }
 
-        public int RequestUserID { get; private set; }
+        public Guid RequestUserID { get; private set; }
         public virtual User RequestUser { get; private set; }
-        public int ForUserID { get; private set; }
+        public Guid ForUserID { get; private set; }
         public virtual User ForUser { get; private set; }
 
         public void GetRequestUser(User requestUser)
