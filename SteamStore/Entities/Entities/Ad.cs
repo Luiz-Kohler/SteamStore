@@ -28,6 +28,21 @@ namespace Entities.Entities
         public virtual Sale Sale { get; private set; }
         public bool IsSold { get; private set; }
 
+        public void GetSellerUser(Item item)
+        {
+            this.Item = item;
+        }
+
+        public void GetSellerUser(User sellerUser)
+        {
+            this.SellerUser = sellerUser;
+        }
+
+        public void GetSale(Sale sale)
+        {
+            this.Sale = sale;
+        }
+
         public void SellItem(int saleID)
         {
             SaleID = saleID;
