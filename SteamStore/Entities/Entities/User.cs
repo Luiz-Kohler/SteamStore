@@ -1,5 +1,5 @@
 ﻿using Entities.FatherEntity;
-using Entities.ValueObject;
+using Entities.ComplexTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

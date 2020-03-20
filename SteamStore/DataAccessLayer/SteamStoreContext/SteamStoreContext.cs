@@ -29,6 +29,29 @@ namespace DataAccessLayer.SteamStoreContext
             //Using every mappings in this assembly for creat the database.
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+
+            modelBuilder.Entity<User>(table =>
+            {
+                table.OwnsOne(
+                    x => x.Login,
+                    login =>
+                    {
+                        login.Property(x => x.Email).IsRequired();
+                        login.Property(x => x.Password).IsRequired();
+                    });
+            });
+
+            modelBuilder.Entity<Admin>(table =>
+            {
+                table.OwnsOne(
+                    x => x.Login,
+                    login =>
+                    {
+                        login.Property(x => x.Email).IsRequired();
+                        login.Property(x => x.Password).IsRequired();
+                    });
+            });
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessObject.SteamCommunityStore.Mappings
+namespace DataAccessLayer.SteamStoreContext.Mappings
 {
     public class UserMapConfig : IEntityTypeConfiguration<User>
     {
@@ -52,16 +52,8 @@ namespace DataAccessObject.SteamCommunityStore.Mappings
                    .WithOne(f => f.User)
                    .HasForeignKey(f => f.UserID);
 
-
-
-            builder.Property(u => u.Login.Email).IsRequired(true).IsUnicode(false).HasMaxLength(100);
-            builder.HasIndex(u => u.Login.Email).IsUnique(true);
-
             builder.Property(u => u.Nick).IsRequired(true).IsUnicode(false).HasMaxLength(20);
             builder.HasIndex(u => u.Nick).IsUnique(false);
-
-            builder.Property(u => u.Login.Password).IsRequired(true).IsUnicode(true).HasMaxLength(16);
-            builder.HasIndex(u => u.Login.Password).IsUnique(false);
         }
     }
 }

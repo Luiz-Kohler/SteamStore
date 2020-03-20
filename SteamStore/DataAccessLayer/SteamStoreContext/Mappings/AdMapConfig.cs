@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessObject.SteamCommunityStore.Mappings
+namespace DataAccessLayer.SteamStoreContext.Mappings
 {
     public class AdMapConfig : IEntityTypeConfiguration<Ad>
     {
