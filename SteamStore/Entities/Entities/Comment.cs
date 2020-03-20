@@ -21,5 +21,15 @@ namespace Entities.Entities
         public virtual User Writter { get; private set; }
         public int ForUserID { get; private set; }
         public virtual User ForUser { get; private set; }
+
+        public void GetUserWritter(User userWritter)
+        {
+            this.Writter = userWritter;
+        }
+
+        public void GetForUser(User forUser)
+        {
+            this.ForUser = forUser;
+        }
     }
 }
