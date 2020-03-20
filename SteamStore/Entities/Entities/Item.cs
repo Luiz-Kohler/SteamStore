@@ -17,7 +17,7 @@ namespace Entities.Entities
         public int UserID { get; private set; }
         public virtual User User { get; private set; }
 
-        public void GetUse(User user)
+        public void GetUser(User user)
         {
             this.User = user;
         }

@@ -17,5 +17,15 @@ namespace Entities.Entities
         public virtual User RequestUser { get; private set; }
         public int ForUserID { get; private set; }
         public virtual User ForUser { get; private set; }
+
+        public void GetRequestUser(User requestUser)
+        {
+            this.RequestUser = requestUser;
+        }
+
+        public void GetForUser(User forUser)
+        {
+            this.ForUser = forUser;
+        }
     }
 }
