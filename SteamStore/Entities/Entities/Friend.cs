@@ -17,5 +17,15 @@ namespace Entities.Entities
         public User User { get; private set; }
         public int FriendUserID { get; private set; }
         public User FriendUser { get; private set; }
+
+        public void GetUser(User user)
+        {
+            this.User = user;
+        }
+
+        public void GetFriendUser(User friendUser)
+        {
+            this.FriendUser = friendUser;
+        }
     }
 }
