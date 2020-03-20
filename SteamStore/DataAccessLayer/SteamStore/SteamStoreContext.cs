@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace DataAccessLayer.SteamStoreContext
+namespace DataAccessLayer.SteamStore
 {
     public class SteamStoreContext : DbContext
     {
@@ -36,8 +36,8 @@ namespace DataAccessLayer.SteamStoreContext
                     x => x.Login,
                     login =>
                     {
-                        login.Property(x => x.Email).IsRequired();
-                        login.Property(x => x.Password).IsRequired();
+                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email");
+                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password");
                     });
             });
 
@@ -47,8 +47,8 @@ namespace DataAccessLayer.SteamStoreContext
                     x => x.Login,
                     login =>
                     {
-                        login.Property(x => x.Email).IsRequired();
-                        login.Property(x => x.Password).IsRequired();
+                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email");
+                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password");
                     });
             });
 

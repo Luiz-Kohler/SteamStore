@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.SteamStoreContext.Mappings
+namespace DataAccessLayer.SteamStore.Mappings
 {
     public class UserMapConfig : IEntityTypeConfiguration<User>
     {
