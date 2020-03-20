@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.FatherEntity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Entities
 {
-    public class Ad
+    public class Ad : Entity
     {
         public decimal Price { get; private set; }
         public DateTime DateAd { get; private set; }

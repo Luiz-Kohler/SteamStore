@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.FatherEntity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Entities
 {
-    public class Sale
+    public class Sale : Entity
     {
         public DateTime DateSell { get; private set; }
         public int BuyerId { get; private set; }

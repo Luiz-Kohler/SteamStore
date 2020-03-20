@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.FatherEntity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Entities
 {
-    public class Comment
+    public class Comment : Entity
     {
         public string Message { get; private set; }
         public DateTime DateTimeComment { get; private set; }

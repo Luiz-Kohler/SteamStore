@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared
+namespace Entities.FatherEntity
 {
     public class Entity
     {

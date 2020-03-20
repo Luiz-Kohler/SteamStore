@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.FatherEntity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Entities
 {
-    public class Admin
+    public class Admin : Entity
     {
         public string Name { get; set; }
         public string Email { get; set; }

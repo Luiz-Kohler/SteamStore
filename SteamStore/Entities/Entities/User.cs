@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.FatherEntity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Entities
 {
-    public class User
+    public class User : Entity
     {
         public string Nick { get; private set; }
         public string Email { get; private set; }
