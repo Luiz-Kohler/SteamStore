@@ -1,4 +1,5 @@
 ﻿using Entities.FatherEntity;
+using Entities.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,7 @@ namespace Entities.Entities
     public class User : Entity
     {
         public string Nick { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
+        public Login Login { get; set; }
         public DateTime BornDate { get; private set; }
         public decimal Cash { get; private set; }
         public virtual IList<Item> Items { get; set; }
