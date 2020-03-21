@@ -1,7 +1,7 @@
-# Projeto feito por padawan junto com a Proway
+# Projeto feito por Padawan no curso de C# da Proway promovido pela HBSIS
 
 # SteamStore
-Simulação do mercado da comunidade da Steam
+ Uma API Rest que simula do mercado da comunidade da Steam com algumas diferenças.
 
 # Integrantes:
   * Luiz Felipe dos Santos Kohler
@@ -9,6 +9,12 @@ Simulação do mercado da comunidade da Steam
   * Thiago Morlo
 
 # Tecnologias:
-  * BackEnd - Asp Net Core - C#
-  * FrontEnd - React
+  * C#
+  * Asp.Net Core
+  * EntityFramework Core
+  * Log4net
+  * Flunt
+  * Automapper
+  
+  
 
