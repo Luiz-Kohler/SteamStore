@@ -1,4 +1,5 @@
 ﻿using Entities.FatherEntity;
+using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,8 +12,13 @@ namespace Entities.Entities
         {
 
         }
-        public Ad(decimal price, int itemID, Guid sellerUserID)
+        public Ad(decimal price, Guid itemID, Guid sellerUserID)
         {
+            AddNotifications(new Contract()
+                .Requires()
+                .IsGreaterOrEqualsThan(price, 0, "Ad.Price", "O anuncio não pode ter um preço 0 ou menos")
+                );
+
             Price = price;
             DateAd = DateTime.UtcNow;
             ItemID = itemID;
@@ -24,7 +30,7 @@ namespace Entities.Entities
 
         public decimal Price { get; private set; }
         public DateTime DateAd { get; private set; }
-        public int ItemID { get; private set; }
+        public Guid ItemID { get; private set; }
         public virtual Item Item { get; private set; }
         public Guid SellerUserID { get; private set; }
         public virtual User SellerUser { get; private set; }
@@ -32,7 +38,7 @@ namespace Entities.Entities
         public virtual Sale Sale { get; private set; }
         public bool IsSold { get; private set; }
 
-        public void GetSellerUser(Item item)
+        public void GetItem(Item item)
         {
             this.Item = item;
         }

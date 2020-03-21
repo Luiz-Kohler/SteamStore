@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
 
 namespace Entities.FatherEntity
 {
-    public class Entity
+    public class Entity : Notifiable
     {
 
         public Entity()
