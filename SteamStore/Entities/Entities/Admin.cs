@@ -17,8 +17,6 @@ namespace Entities.Entities
         {
             AddNotifications(new Contract()
                 .Requires()
-                .HasMinLen(name, 2, "Admin.Name", "O nome do admin não pode ser menor que 2 caracteres")
-                .HasMaxLen(name, 70, "Admin.Name", "O nome do admin não pode ser maior que 70 caracteres")
 
                 .HasMinLen(login.Email, 11, "Admin.Login.Email", "O Email do admin não pode ser menor que 11 caracteres")
                 .HasMaxLen(login.Email, 70, "Admin.Login.Email", "O Email do admin não pode ser maior que 70 caracteres")
