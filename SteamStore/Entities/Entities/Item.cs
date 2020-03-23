@@ -1,4 +1,5 @@
 ﻿using Entities.FatherEntity;
+using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,11 @@ namespace Entities.Entities
         public Item(string name, Guid userID)
         {
             Name = name;
+
+            AddNotifications(new Contract()
+                .Requires()
+                .HasMinLen(name, 1, "Item.Name", "O nome do item não pode ser nulo"));
+
             UserID = userID;
         }
 
