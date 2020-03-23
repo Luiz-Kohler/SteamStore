@@ -1,7 +1,9 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,39 +11,107 @@ namespace DataAccessLayer.SteamStore.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
-        public Task Creat(Comment objectToCreat)
+        private SteamStoreContext _context;
+
+        public CommentRepository(SteamStoreContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task Disable(Guid objectToDisableID)
+        public async Task Creat(Comment objectToCreat)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Comments.Add(objectToCreat);
+                _context.Entry<Comment>(objectToCreat).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<List<Comment>> GetAllObjects()
+        public async Task Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Comment commentToDisable = await GetObjectByID(objectToDisableID);
+                commentToDisable.ChangeState(false);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<List<Comment>> GetCommentsByForUserID(Guid forUserID)
+        public async Task<List<Comment>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Comments.Where(c => c.IsActive).ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<List<Comment>> GetCommentsByWritterID(Guid writterID)
+        public async Task<List<Comment>> GetCommentsByForUserID(Guid forUserID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Comments.Where(c => c.ForUserID == forUserID && c.IsActive).ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<Comment> GetObjectByID(Guid objectToGetID)
+        public async Task<List<Comment>> GetCommentsByWritterID(Guid writterID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Comments.Where(c => c.WritterID == writterID && c.IsActive).ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task Update(Comment objectToUpdate)
+        public async Task<Comment> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Comments.FirstOrDefaultAsync(c => c.ID == objectToGetID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task Update(Comment objectToUpdate)
+        {
+            try
+            {
+                _context.Entry<Comment>(objectToUpdate).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
