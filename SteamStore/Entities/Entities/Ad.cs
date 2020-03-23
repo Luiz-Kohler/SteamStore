@@ -14,11 +14,6 @@ namespace Entities.Entities
         }
         public Ad(decimal price, Guid itemID, Guid sellerUserID)
         {
-            AddNotifications(new Contract()
-                .Requires()
-                .IsGreaterOrEqualsThan(price, 0, "Ad.Price", "O anuncio não pode ter um preço 0 ou menos")
-                );
-
             Price = price;
             DateAd = DateTime.UtcNow;
             ItemID = itemID;

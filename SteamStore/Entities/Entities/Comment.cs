@@ -15,12 +15,6 @@ namespace Entities.Entities
         }
         public Comment(string message, Guid writterID, Guid forUserID)
         {
-            AddNotifications(new Contract()
-                .Requires()
-                .HasMinLen(message, 1, "Comment.Message", "O comentario não pode ser menor que 11 caracteres")
-                .HasMaxLen(message, 100, "Comment.Message", "O comentario não pode ser maior que 100 caracteres")
-                );
-
             Message = message;
             DateTimeComment = DateTime.UtcNow;
             WritterID = writterID;
