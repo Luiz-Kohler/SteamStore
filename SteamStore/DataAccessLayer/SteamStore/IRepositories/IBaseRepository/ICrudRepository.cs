@@ -11,6 +11,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IBaseRepositories
         Task Creat(T objectToCreat);
         Task Disable(int objectToDisableID);
         Task Update(T objectToUpdate);
-        Task GetItemByID(int objectToGetID);
+        Task<T> GetObjectByID(int objectToGetID);
     }
 }
