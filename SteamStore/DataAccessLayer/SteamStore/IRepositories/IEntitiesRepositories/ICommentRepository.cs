@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
-    public interface ICommentRepositoy : ICrudRepository<Comment>, IBaseSearchRepository<Comment>
+    public interface ICommentRepository : ICrudRepository<Comment>, IBaseSearchRepository<Comment>
     {
         Task<List<Comment>> GetCommentsByWritterID(Guid writterID);
         Task<List<Comment>> GetCommentsByForUserID(Guid forUserID);
