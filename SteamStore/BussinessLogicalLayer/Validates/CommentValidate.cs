@@ -12,12 +12,12 @@ namespace BussinessLogicalLayer.Validates
     {
         public IReadOnlyCollection<Notification> ValidateObjectToCreat(Comment objectToValidate)
         {
-            Contract ValidatingAd = new Contract()
+            Contract ValidatingComment = new Contract()
             .Requires()
             .HasMinLen(objectToValidate.Message, 1, "Comment.Message", "O comentario não pode ser menor que 11 caracteres")
             .HasMaxLen(objectToValidate.Message, 100, "Comment.Message", "O comentario não pode ser maior que 100 caracteres");
 
-            return ValidatingAd.Notifications;
+            return ValidatingComment.Notifications;
         }
     }
 }
