@@ -10,6 +10,7 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
     public interface IItemRepository : ICrudRepository<Item>, IBaseSearchRepository<Item>, ISearchByNameRepository<Item>
     {
-        Task<List<Item>> GetItemsUserID(Guid userID);
+        Task<List<Item>> GetItemsUserID(Guid itemID);
+        Task<Item> GetItemForAd(Guid itemID);
     }
 }

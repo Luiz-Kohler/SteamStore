@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
-    public interface IFriendRequestRepository : ICrudRepository<FriendRequest>, IBaseSearchRepository<Friend>
+    public interface IFriendRequestRepository : ICrudRepository<FriendRequest>, IBaseSearchRepository<FriendRequest>
     {
         Task<List<Friend>> GetFriedsRequestByUserID(Guid userID);
     }
