@@ -26,7 +26,7 @@ namespace BussinessLogicalLayer.Validates
 
             if (BornDate.AddYears(18) < DateTime.Now)
             {
-                AddNotification("Admin.BornDate", "O usuario deve ter pelo menos 18 anos para ser um admin");
+                ValidatingAdmin.AddNotification("Admin.BornDate", "O usuario deve ter pelo menos 18 anos para ser um admin");
             }
 
             return ValidatingAdmin.Notifications;
