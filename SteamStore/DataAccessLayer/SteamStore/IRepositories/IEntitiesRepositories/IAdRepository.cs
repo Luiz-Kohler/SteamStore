@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
-    public interface IAdReposioty : ICrudRepository<Ad>
+    public interface IAdRepository : ICrudRepository<Ad>
     {
     }
 }

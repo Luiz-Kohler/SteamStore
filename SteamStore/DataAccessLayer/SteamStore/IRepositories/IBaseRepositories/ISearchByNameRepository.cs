@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IBaseRepository
 {
-    public interface SearchByName <T>
+    public interface ISearchByNameRepository <T>
     {
         Task<List<T>> GetObjectByName(string name);
     }
