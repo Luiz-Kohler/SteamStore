@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Text;
 namespace Entities.ComplexTypes
 {
     [ComplexType]
-    public class Login
+    public class Login : Notifiable
     {
 
         public Login(string email, string password)

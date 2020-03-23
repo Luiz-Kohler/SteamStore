@@ -28,22 +28,6 @@ namespace Entities.Entities
 
         public User(string nick, Login login, DateTime bornDate)
         {
-
-            AddNotifications(new Contract()
-                .Requires()
-
-                .HasMinLen(nick, 1, "User.Nick", "O nick do usuario deve conter pelo menos 1 caractere")
-
-                .HasMinLen(login.Email, 11, "User.Login.Email", "O Email do usuario não pode ser menor que 11 caracteres")
-                .HasMaxLen(login.Email, 70, "User.Login.Email", "O Email do usuario não pode ser maior que 70 caracteres")
-
-                .HasMinLen(login.Password, 8, "User.Login.Password", "A senha do usuario não pode ser menor que 8 caracteres")
-                .HasMaxLen(login.Password, 16, "User.Login.Password", "A senha do usuario não pode ser menor que 16 caracteres")
-
-                .IsGreaterOrEqualsThan(bornDate, DateTime.UtcNow, "User.BornDate", "A data de nascimento do usuario é invalida")
-                .IsLowerThan(bornDate, DateTime.Now.AddYears(-120), "User.BornDate", "A data de nascimento do usuario é invalida")
-                );
-
             Nick = nick;
             Login = login;
             BornDate = bornDate;
