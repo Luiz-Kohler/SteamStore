@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
-    public interface IAdRepository : ICrudRepository<Ad>, IBaseSearchRepository<Ad>
+    public interface IFriendRepository : ICrudRepository<Friend>, IBaseSearchRepository<Friend>, ISearchByNameRepository<Friend>
     {
-        Task<List<Ad>> GetAdsForID(Guid SellerID);
+        Task<List<Friend>> GetFriedsByUserID(Guid userID);
     }
 }

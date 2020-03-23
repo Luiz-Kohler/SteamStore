@@ -9,8 +9,8 @@ namespace DataAccessLayer.SteamStore.IRepositories.IBaseRepositories
     public interface ICrudRepository <T>
     {
         Task Creat(T objectToCreat);
-        Task Disable(int objectToDisableID);
+        Task Disable(Guid objectToDisableID);
         Task Update(T objectToUpdate);
-        Task<T> GetObjectByID(int objectToGetID);
+        Task<T> GetObjectByID(Guid objectToGetID);
     }
 }
