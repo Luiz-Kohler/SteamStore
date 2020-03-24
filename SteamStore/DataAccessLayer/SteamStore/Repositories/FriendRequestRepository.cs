@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(FriendRequest objectToCreat)
+        public async Task<Response> Creat(FriendRequest objectToCreat)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<FriendRequest>> GetAllObjects()
+        public async Task<DataResponse<FriendRequest>> GetAllObjects()
         {
             try
             {
@@ -63,7 +64,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<FriendRequest>> GetFriedsRequestByUserID(Guid userID)
+        public async Task<DataResponse<FriendRequest>> GetFriedsRequestByUserID(Guid userID)
         {
             try
             {
@@ -76,7 +77,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<FriendRequest> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<FriendRequest>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -89,7 +90,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(FriendRequest objectToUpdate)
+        public async Task<Response> Update(FriendRequest objectToUpdate)
         {
             try
             {
