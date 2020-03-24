@@ -42,7 +42,7 @@ namespace WebPresentationLayer
             services.AddTransient<ISaleService, SaleService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddScoped<IFriendRepository, FriendRepository>();
             //services.AddTransient<IFriendService, FriendService>();
