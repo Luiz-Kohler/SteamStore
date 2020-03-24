@@ -1,4 +1,5 @@
 ﻿using BussinessLogicalLayer.IServices;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,13 @@ namespace BussinessLogicalLayer.Services
 {
     public class AdminService : IAdminService
     {
+        private readonly IAdminRepository _repository;
+
+        public AdminService(IAdminRepository repository)
+        {
+            _repository = repository;
+        }
+
         public Task Creat(Admin objectToCreat)
         {
             throw new NotImplementedException();
