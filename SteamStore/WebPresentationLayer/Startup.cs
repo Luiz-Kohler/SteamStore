@@ -48,7 +48,7 @@ namespace WebPresentationLayer
             services.AddTransient<IFriendService, FriendService>();
 
             services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
-            //services.AddTransient<IFriendRequestService, FriendRequestService>();
+            services.AddTransient<IFriendRequestService, FriendRequestService>();
 
             services.AddScoped<ICommentRepository, CommentRepository>();
             //services.AddTransient<ICommentService, CommentService>();
