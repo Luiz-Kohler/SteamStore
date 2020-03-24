@@ -6,11 +6,12 @@ namespace Shared.Responses
 {
     public class Response
     {
-        public bool Success { get; set; } = true;
+        public bool Success { get; set; }
         public List<Error> Erros { get; set; }
 
         public Response()
         {
+            Success = true;
             Erros = new List<Error>();
         }
 
