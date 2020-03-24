@@ -1,23 +1,17 @@
 ﻿using BussinessLogicalLayer.Validates.Interface;
 using Entities.Entities;
-using Flunt.Notifications;
-using Flunt.Validations;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BussinessLogicalLayer.Validates
 {
-    public class CommentValidate : Comment, IBaseValidate<Comment>
+    public class CommentValidate : IBaseValidate<Comment>
     {
-        public IReadOnlyCollection<Notification> ValidateObjectToCreat(Comment objectToValidate)
+        public IReadOnlyCollection<Response> ValidateObject(Comment objectToValidate)
         {
-            Contract ValidatingComment = new Contract()
-            .Requires()
-            .HasMinLen(objectToValidate.Message, 1, "Comment.Message", "O comentario não pode ser menor que 11 caracteres")
-            .HasMaxLen(objectToValidate.Message, 100, "Comment.Message", "O comentario não pode ser maior que 100 caracteres");
-
-            return ValidatingComment.Notifications;
+            throw new NotImplementedException();
         }
     }
 }
