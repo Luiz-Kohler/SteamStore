@@ -36,7 +36,7 @@ namespace WebPresentationLayer
             services.AddTransient<IAdService, AdService>();
 
             services.AddScoped<IItemRepository, ItemRepository>();
-            //services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IItemService, ItemService>();
 
             services.AddScoped<ISaleRepository, SaleRepository>();
             //services.AddTransient<ISaleService, SaleService>();
