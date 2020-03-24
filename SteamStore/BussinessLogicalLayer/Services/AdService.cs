@@ -1,5 +1,6 @@
 ﻿using BussinessLogicalLayer.IServices;
 using Entities.Entities;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,32 +10,32 @@ namespace BussinessLogicalLayer.Services
 {
     public class AdService : IAdService
     {
-        public Task Creat(Ad objectToCreat)
+        public Task<Response> Creat(Ad objectToCreat)
         {
             throw new NotImplementedException();
         }
 
-        public Task Disable(Guid objectToDisableID)
+        public Task<Response> Disable(Guid objectToDisableID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Ad>> GetAdsForID(Guid SellerID)
+        public Task<DataResponse<Ad>> GetAdsForID(Guid SellerID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Ad>> GetAllObjects()
+        public Task<DataResponse<Ad>> GetAllObjects()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Ad> GetObjectByID(Guid objectToGetID)
+        public Task<DataResponse<Ad>> GetObjectByID(Guid objectToGetID)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(Ad objectToUpdate)
+        public Task<Response> Update(Ad objectToUpdate)
         {
             throw new NotImplementedException();
         }

@@ -3,6 +3,7 @@ using BussinessLogicalLayer.Validates;
 using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Flunt.Notifications;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,39 +21,33 @@ namespace BussinessLogicalLayer.Services
             _repository = repository;
         }
 
-        public Task Creat(Admin objectToCreat)
-        {
-            IReadOnlyCollection<Notification> totalNotifications= _validate.ValidateObjectToCreat(objectToCreat);
-            if(totalNotifications.Count > 0)
-            {
-
-            }
-              
-        }
-
-        public Task Disable(Guid objectToDisableID)
+        public Task<Response> Creat(Admin objectToCreat)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Admin>> GetAllObjects()
+        public Task<Response> Disable(Guid objectToDisableID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Admin> GetObjectByID(Guid objectToGetID)
+        public Task<DataResponse<Admin>> GetAllObjects()
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Admin>> GetObjectByName(string name)
+        public Task<DataResponse<Admin>> GetObjectByID(Guid objectToGetID)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(Admin objectToUpdate)
+        public Task<DataResponse<Admin>> GetObjectByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response> Update(Admin objectToUpdate)
         {
             throw new NotImplementedException();
         }
     }
-}
