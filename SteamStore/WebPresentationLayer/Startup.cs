@@ -1,3 +1,4 @@
+using BussinessLogicalLayer.IServices;
 using DataAccessLayer.SteamStore;
 using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using DataAccessLayer.SteamStore.Repositories;
@@ -28,7 +29,7 @@ namespace WebPresentationLayer
 
 
             services.AddScoped<IAdminRepository, AdminRepository>();
-            //services.AddTransient<IAdminService, AdminService>();
+            services.AddTransient<IAdminService, AdminService>();
 
             services.AddScoped<IAdRepository, AdRepository>();
             //services.AddTransient<IAdService, AdService>();
