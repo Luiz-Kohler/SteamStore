@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(Comment objectToCreat)
+        public async Task<Response> Creat(Comment objectToCreat)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -48,7 +49,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Comment>> GetAllObjects()
+        public async Task<DataResponse<Comment>> GetAllObjects()
         {
             try
             {
@@ -61,7 +62,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Comment>> GetCommentsByForUserID(Guid forUserID)
+        public async Task<DataResponse<Comment>> GetCommentsByForUserID(Guid forUserID)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Comment>> GetCommentsByWritterID(Guid writterID)
+        public async Task<DataResponse<Comment>> GetCommentsByWritterID(Guid writterID)
         {
             try
             {
@@ -87,7 +88,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<Comment> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Comment>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -100,7 +101,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(Comment objectToUpdate)
+        public async Task<Response> Update(Comment objectToUpdate)
         {
             try
             {
