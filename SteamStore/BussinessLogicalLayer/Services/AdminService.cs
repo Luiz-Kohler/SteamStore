@@ -1,6 +1,8 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
 using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
+using Flunt.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,7 @@ namespace BussinessLogicalLayer.Services
     public class AdminService : IAdminService
     {
         private readonly IAdminRepository _repository;
+        private AdminValidate _validate;
 
         public AdminService(IAdminRepository repository)
         {
@@ -19,7 +22,12 @@ namespace BussinessLogicalLayer.Services
 
         public Task Creat(Admin objectToCreat)
         {
-            throw new NotImplementedException();
+            IReadOnlyCollection<Notification> totalNotifications= _validate.ValidateObjectToCreat(objectToCreat);
+            if(totalNotifications.Count > 0)
+            {
+
+            }
+              
         }
 
         public Task Disable(Guid objectToDisableID)
