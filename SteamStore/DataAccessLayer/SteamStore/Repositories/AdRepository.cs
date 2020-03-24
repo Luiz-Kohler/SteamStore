@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(Ad objectToCreat)
+        public async Task<Response> Creat(Ad objectToCreat)
         {
             try
             {
@@ -32,7 +33,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -47,7 +48,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Ad>> GetAdsForID(Guid SellerID)
+        public async Task<DataResponse<Ad>> GetAdsForID(Guid SellerID)
         {
             try
             {
@@ -60,7 +61,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Ad>> GetAllObjects()
+        public async Task<DataResponse<Ad>> GetAllObjects()
         {
             try
             {
@@ -73,7 +74,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<Ad> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Ad>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(Ad objectToUpdate)
+        public async Task<Response> Update(Ad objectToUpdate)
         {
             try
             {
