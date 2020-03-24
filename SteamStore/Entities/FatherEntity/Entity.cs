@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entities.FatherEntity
 {
@@ -12,6 +13,7 @@ namespace Entities.FatherEntity
             
         }
 
+        [Key]
         public Guid ID { get; set; }
         public bool IsActive { get; set; }
 
