@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(Item objectToCreat)
+        public async Task<Response> Creat(Item objectToCreat)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Item>> GetAllObjects()
+        public async Task<DataResponse<Item>> GetAllObjects()
         {
             try
             {
@@ -63,7 +64,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Item>> GetItemsUserID(Guid userID)
+        public async Task<DataResponse<Item>> GetItemsUserID(Guid userID)
         {
             try
             {
@@ -76,7 +77,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<Item> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Item>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -89,7 +90,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Item>> GetObjectByName(string name)
+        public async Task<DataResponse<Item>> GetObjectByName(string name)
         {
             try
             {
@@ -102,7 +103,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(Item objectToUpdate)
+        public async Task<Response> Update(Item objectToUpdate)
         {
             try
             {
