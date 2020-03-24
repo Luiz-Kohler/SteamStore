@@ -10,6 +10,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
     public interface IFriendRepository : ICrudRepository<Friend>, IBaseSearchRepository<Friend>, ISearchByNameRepository<Friend>
     {
-        Task<List<Friend>> GetFriedsByUserID(Guid userID);
+        Task<DataResponse<Friend>> GetFriedsByUserID(Guid userID);
     }
 }

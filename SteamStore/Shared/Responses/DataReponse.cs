@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shared.Responses
 {
-    public class DataReponse <T> : Response
+    public class DataResponse <T> : Response
     {
         public List<T> Data { get; set; }
     }

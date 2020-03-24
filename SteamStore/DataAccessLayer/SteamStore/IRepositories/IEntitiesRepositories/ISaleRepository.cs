@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IBaseRepositories;
 using Entities.Entities;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
     public interface ISaleRepository : ICrudRepository<Sale>
     {
-        Task<List<Sale>> GetSalesByBuyerID(Guid buyerID);
-        Task<Sale> GetSalesByAd(Guid adID);
+        Task<DataResponse<Sale>> GetSalesByBuyerID(Guid buyerID);
+        Task<DataResponse<Sale>> GetSalesByAd(Guid adID);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(Admin objectToCreat)
+        public async Task<Response> Creat(Admin objectToCreat)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -48,7 +49,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Admin>> GetAllObjects()
+        public async Task<DataResponse<Admin>> GetAllObjects()
         {
             try
             {
@@ -61,7 +62,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<Admin> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Admin>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Admin>> GetObjectByName(string name)
+        public async Task<DataResponse<Admin>> GetObjectByName(string name)
         {
             try
             {
@@ -87,7 +88,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(Admin objectToUpdate)
+        public async Task<Response> Update(Admin objectToUpdate)
         {
             try
             {
