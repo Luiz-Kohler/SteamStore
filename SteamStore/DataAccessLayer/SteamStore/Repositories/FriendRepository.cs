@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
-        public async Task Creat(Friend objectToCreat)
+        public async Task<Response> Creat(Friend objectToCreat)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
             try
             {
@@ -49,7 +50,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Friend>> GetAllObjects()
+        public async Task<DataResponse<Friend>> GetAllObjects()
         {
             try
             {
@@ -62,7 +63,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Friend>> GetFriedsByUserID(Guid userID)
+        public async Task<DataResponse<Friend>> GetFriedsByUserID(Guid userID)
         {
             try
             {
@@ -75,7 +76,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<Friend> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Friend>> GetObjectByID(Guid objectToGetID)
         {
             try
             {
@@ -88,7 +89,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task<List<Friend>> GetObjectByName(string name)
+        public async Task<DataResponse<Friend>> GetObjectByName(string name)
         {
             try
             {
@@ -101,7 +102,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
         }
 
-        public async Task Update(Friend objectToUpdate)
+        public async Task<Response> Update(Friend objectToUpdate)
         {
             try
             {
