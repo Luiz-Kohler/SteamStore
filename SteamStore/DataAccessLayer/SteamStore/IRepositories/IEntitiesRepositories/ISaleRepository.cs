@@ -11,6 +11,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
     public interface ISaleRepository : ICrudRepository<Sale>
     {
         Task<DataResponse<Sale>> GetSalesByBuyerID(Guid buyerID);
-        Task<DataResponse<Sale>> GetSalesByAd(Guid adID);
+        Task<DataResponse<Sale>> GetSaleByAd(Guid adID);
     }
 }

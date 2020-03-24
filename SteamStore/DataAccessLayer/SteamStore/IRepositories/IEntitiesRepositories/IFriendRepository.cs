@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IBaseRepositories;
 using DataAccessLayer.SteamStore.IRepositories.IBaseRepository;
 using Entities.Entities;
+using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
     public interface IFriendRepository : ICrudRepository<Friend>, IBaseSearchRepository<Friend>, ISearchByNameRepository<Friend>
     {
-        Task<DataResponse<Friend>> GetFriedsByUserID(Guid userID);
+        Task<DataResponse<Friend>> GetFriendsByUserID(Guid userID);
     }
 }

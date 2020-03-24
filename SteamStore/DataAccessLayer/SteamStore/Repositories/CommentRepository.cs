@@ -21,6 +21,7 @@ namespace DataAccessLayer.SteamStore.Repositories
 
         public async Task<Response> Creat(Comment objectToCreat)
         {
+            Response response = new Response();
             try
             {
                 _context.Comments.Add(objectToCreat);
@@ -29,80 +30,102 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<Response> Disable(Guid objectToDisableID)
         {
+            Response response = new Response();
             try
             {
-                Comment commentToDisable = await GetObjectByID(objectToDisableID);
-                commentToDisable.ChangeState(false);
+                DataResponse<Comment> commentToDisable = await GetObjectByID(objectToDisableID);
+
+                if (commentToDisable.Erros.Count == 0)
+                {
+                    response.Success = false;
+                    response.AddError("Ad.ID", "Não existe um admin com este ID");
+                    return response;
+                }
+
+                commentToDisable.Data[0].ChangeState(false);
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<DataResponse<Comment>> GetAllObjects()
         {
+            DataResponse<Comment> dataResponse = new DataResponse<Comment>();
             try
             {
-                return await _context.Comments.Where(c => c.IsActive).ToListAsync();
+                dataResponse.Data = await _context.Comments.Where(c => c.IsActive).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<Comment>> GetCommentsByForUserID(Guid forUserID)
         {
+            DataResponse<Comment> dataResponse = new DataResponse<Comment>();
+
             try
             {
-                return await _context.Comments.Where(c => c.ForUserID == forUserID && c.IsActive).ToListAsync();
+                dataResponse.Data = await _context.Comments.Where(c => c.ForUserID == forUserID && c.IsActive).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<Comment>> GetCommentsByWritterID(Guid writterID)
         {
+            DataResponse<Comment> dataResponse = new DataResponse<Comment>();
             try
             {
-                return await _context.Comments.Where(c => c.WritterID == writterID && c.IsActive).ToListAsync();
+                dataResponse.Data = await _context.Comments.Where(c => c.WritterID == writterID && c.IsActive).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<Comment>> GetObjectByID(Guid objectToGetID)
         {
+            DataResponse<Comment> dataResponse = new DataResponse<Comment>();
+
             try
             {
-                return await _context.Comments.FirstOrDefaultAsync(c => c.ID == objectToGetID);
+                dataResponse.Data.Add(await _context.Comments.FirstOrDefaultAsync(c => c.ID == objectToGetID));
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<Response> Update(Comment objectToUpdate)
         {
+            Response response = new Response();
             try
             {
                 _context.Entry<Comment>(objectToUpdate).State = EntityState.Modified;
@@ -110,9 +133,10 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
     }
 }

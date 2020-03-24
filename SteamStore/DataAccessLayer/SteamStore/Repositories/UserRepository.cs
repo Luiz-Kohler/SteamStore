@@ -21,6 +21,7 @@ namespace DataAccessLayer.SteamStore.Repositories
 
         public async Task<Response> Creat(User objectToCreat)
         {
+            Response response = new Response();
             try
             {
                 _context.Users.Add(objectToCreat);
@@ -29,69 +30,86 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<Response> Disable(Guid objectToDisableID)
         {
+            Response response = new Response();
             try
             {
-                User userToDisable = await GetObjectByID(objectToDisableID);
-                userToDisable.ChangeState(false);
+                DataResponse<User> userToDisable = await GetObjectByID(objectToDisableID);
 
-                _context.Entry<User>(userToDisable).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                if (userToDisable.Erros.Count == 0)
+                {
+                    response.Success = false;
+                    response.AddError("Ad.ID", "Não existe um admin com este ID");
+                    return response;
+                }
+
+                userToDisable.Data[0].ChangeState(false);
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<DataResponse<User>> GetAllObjects()
         {
+            DataResponse<User> dataResponse = new DataResponse<User>();
             try
             {
-                return await _context.Users.Where(u => u.IsActive).ToListAsync();
+                dataResponse.Data =  await _context.Users.Where(u => u.IsActive).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<User>> GetObjectByID(Guid objectToGetID)
         {
+            DataResponse<User> dataResponse = new DataResponse<User>();
+
             try
             {
-                return await _context.Users.FirstAsync(u => u.ID == objectToGetID);
+                dataResponse.Data.Add(await _context.Users.FirstAsync(u => u.ID == objectToGetID));
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<User>> GetObjectByName(string name)
         {
+            DataResponse<User> dataResponse = new DataResponse<User>();
             try
             {
-                return await _context.Users.Where(i => i.Nick.Equals(name, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+                dataResponse.Data = await _context.Users.Where(i => i.Nick.Equals(name, StringComparison.OrdinalIgnoreCase)).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<Response> Update(User objectToUpdate)
         {
+            Response response = new Response();
             try
             {
                 _context.Entry<User>(objectToUpdate).State = EntityState.Modified;
@@ -99,9 +117,10 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
     }
 }

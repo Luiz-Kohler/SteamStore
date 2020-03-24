@@ -25,7 +25,7 @@ namespace BussinessLogicalLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<DataResponse<Friend>> GetFriedsByUserID(Guid userID)
+        public Task<DataResponse<Friend>> GetFriendsByUserID(Guid userID)
         {
             throw new NotImplementedException();
         }

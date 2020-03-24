@@ -21,6 +21,7 @@ namespace DataAccessLayer.SteamStore.Repositories
 
         public async Task<Response> Creat(FriendRequest objectToCreat)
         {
+            Response response = new Response();
             try
             {
                 _context.FriendRequests.Add(objectToCreat);
@@ -29,69 +30,86 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<Response> Disable(Guid objectToDisableID)
         {
+            Response response = new Response();
             try
             {
-                FriendRequest friendRequestToDisable = await GetObjectByID(objectToDisableID);
-                friendRequestToDisable.ChangeState(false);
+                DataResponse<FriendRequest> friendRequestToDisable = await GetObjectByID(objectToDisableID);
 
-                _context.Entry<FriendRequest>(friendRequestToDisable).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                if (friendRequestToDisable.Erros.Count == 0)
+                {
+                    response.Success = false;
+                    response.AddError("Ad.ID", "Não existe um admin com este ID");
+                    return response;
+                }
+
+                friendRequestToDisable.Data[0].ChangeState(false);
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
 
         public async Task<DataResponse<FriendRequest>> GetAllObjects()
         {
+            DataResponse<FriendRequest> dataResponse = new DataResponse<FriendRequest>();
             try
             {
-                return await _context.FriendRequests.Where(f => f.IsActive).ToListAsync();
+                dataResponse.Data = await _context.FriendRequests.Where(f => f.IsActive).ToListAsync();
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<FriendRequest>> GetFriedsRequestByUserID(Guid userID)
         {
+            DataResponse<FriendRequest> dataResponse = new DataResponse<FriendRequest>();
             try
             {
-                return await _context.FriendRequests.Where(f =>  f.ForUserID == userID && f.IsActive).ToListAsync();
+                dataResponse.Data = await _context.FriendRequests.Where(f =>  f.ForUserID == userID && f.IsActive).ToListAsync();
             }
             catch (Exception)
             {
 
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<DataResponse<FriendRequest>> GetObjectByID(Guid objectToGetID)
         {
+            DataResponse<FriendRequest> dataResponse = new DataResponse<FriendRequest>();
             try
             {
-                return await _context.FriendRequests.FirstOrDefaultAsync(f => f.ID == objectToGetID);
+                dataResponse.Data.Add(await _context.FriendRequests.FirstOrDefaultAsync(f => f.ID == objectToGetID));
             }
             catch (Exception)
             {
-
-                throw;
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return dataResponse;
         }
 
         public async Task<Response> Update(FriendRequest objectToUpdate)
         {
+            Response response = new Response();
             try
             {
                 _context.Entry<FriendRequest>(objectToUpdate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -99,9 +117,11 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception)
             {
-
-                throw;
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
             }
+            return response;
         }
+
     }
 }

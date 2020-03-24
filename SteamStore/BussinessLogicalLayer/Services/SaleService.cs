@@ -25,7 +25,7 @@ namespace BussinessLogicalLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<DataResponse<Sale>> GetSalesByAd(Guid adID)
+        public Task<DataResponse<Sale>> GetSaleByAd(Guid adID)
         {
             throw new NotImplementedException();
         }
