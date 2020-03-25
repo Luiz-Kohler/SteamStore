@@ -19,6 +19,11 @@ namespace BussinessLogicalLayer.Services
             _repository = repository;
         }
 
+        public Task<DataResponse<Admin>> Authetication(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Response> Creat(Admin objectToCreat)
         {
             throw new NotImplementedException();

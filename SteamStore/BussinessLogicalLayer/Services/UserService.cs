@@ -1,6 +1,7 @@
 ﻿using BussinessLogicalLayer.IServices;
 using BussinessLogicalLayer.Validates;
 using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
+using Entities.ComplexTypes;
 using Entities.Entities;
 using Shared.Responses;
 using System;
@@ -18,6 +19,13 @@ namespace BussinessLogicalLayer.Services
         public UserService(IUserRepository repository)
         {
             _repository = repository;
+        }
+
+        public async Task<DataResponse<User>> Authetication(string email, string password)
+        {
+            DataResponse<User> dataResponse = (DataResponse<User>)Validate.ValidateLoginUser(email, password);
+
+            return dataResponse.HasError() ? dataResponse : await _repository.Authetication(email, password);
         }
 
         public async Task<Response> Creat(User objectToCreat)
