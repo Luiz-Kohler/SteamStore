@@ -13,7 +13,6 @@ namespace BussinessLogicalLayer.Services
     public class AdminService : IAdminService
     {
         private readonly IAdminRepository _repository;
-        private AdminValidate _validate;
 
         public AdminService(IAdminRepository repository)
         {

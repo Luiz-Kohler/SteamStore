@@ -22,5 +22,11 @@ namespace Entities.ComplexTypes
         {
             this.Password = password;
         }
+
+        public void ChangeEmail(string email)
+        {
+            email = email.ToLower().Trim();
+            this.Email = email;
+        }
     }
 }

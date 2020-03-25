@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Entities.Entities
 {
@@ -25,6 +26,14 @@ namespace Entities.Entities
         public void GetUser(User user)
         {
             this.User = user;
+        }
+
+        public void ChangeName(string name)
+        {
+            name = name.ToLower().Trim();
+            name = Regex.Replace(name, @"\s+", " ");
+
+            this.Name = name;
         }
     }
 }

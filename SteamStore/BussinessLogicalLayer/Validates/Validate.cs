@@ -1,5 +1,4 @@
-﻿using BussinessLogicalLayer.Validates.Interface;
-using Entities.Entities;
+﻿using Entities.Entities;
 using Shared.Responses;
 using System;
 using System.Collections.Generic;
@@ -113,12 +112,7 @@ namespace BussinessLogicalLayer.Validates
             }
             else
             {
-                /*
-                item. = item.Name.ToLower();
-                item.Name = item.Name.Trim();
-                item.Name = Regex.Replace(item.Name, @"\s+", " ");
-                */
-
+                item.ChangeName(item.Name);
                 if (item.Name.Length < 2 || item.Name.Length > 60)
                 {
                     response.Erros.Add(new Error { Proprety = "Name", Message = "O nome do item deve conter entre 2 a 60 caracteres" });
@@ -169,9 +163,8 @@ namespace BussinessLogicalLayer.Validates
             }
             else
             {
-                Email = Email.ToLower();
-                Email = Email.Trim();
 
+               
                 Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(Email);
 
@@ -230,12 +223,7 @@ namespace BussinessLogicalLayer.Validates
             }
             else
             {
-                string nick = user.Nick;
-                nick = user.Nick.ToLower();
-                nick = user.Nick.Trim();
-                nick = Regex.Replace(user.Nick, @"\s+", " ");
-                user.ChangeNick(nick);
-
+                user.ChangeNick(user.Nick);
 
                 if (user.Nick.Length < 2 || user.Nick.Length > 20)
                 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Entities.Entities
 {
@@ -62,6 +63,8 @@ namespace Entities.Entities
 
         public void ChangeNick(string nick)
         {
+            nick = nick.ToLower().Trim();
+            nick = Regex.Replace(nick, @"\s+", " ");
             this.Nick = nick;
         }
 
