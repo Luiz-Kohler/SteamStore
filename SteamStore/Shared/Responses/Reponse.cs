@@ -27,7 +27,7 @@ namespace Shared.Responses
 
         public bool HasError()
         {
-            return Erros.Count > 0;
+            return Erros.Count > 0 ? this.Success = false : this.Success = true;
         }
     }
 }

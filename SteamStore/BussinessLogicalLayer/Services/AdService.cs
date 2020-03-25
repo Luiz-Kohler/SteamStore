@@ -1,4 +1,6 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
@@ -10,34 +12,65 @@ namespace BussinessLogicalLayer.Services
 {
     public class AdService : IAdService
     {
-        public Task<Response> Creat(Ad objectToCreat)
+
+        private readonly IAdRepository _repository;
+
+        public AdService(IAdRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Creat(Ad objectToCreat)
         {
-            throw new NotImplementedException();
+            Response response = Validate.AdValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat); 
         }
 
-        public Task<DataResponse<Ad>> GetAdsForID(Guid SellerID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if(objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<Ad>> GetAllObjects()
+        public async Task<DataResponse<Ad>> GetAdsForID(Guid SellerID)
         {
-            throw new NotImplementedException();
+            DataResponse<Ad> response = new DataResponse<Ad>();
+
+            if (SellerID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetAdsForID(SellerID);
         }
 
-        public Task<DataResponse<Ad>> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Ad>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllObjects();
         }
 
-        public Task<Response> Update(Ad objectToUpdate)
+        public async Task<DataResponse<Ad>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<Ad> response = new DataResponse<Ad>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
+        }
+
+        public async Task<Response> Update(Ad objectToUpdate)
+        {
+            Response response = Validate.AdValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }

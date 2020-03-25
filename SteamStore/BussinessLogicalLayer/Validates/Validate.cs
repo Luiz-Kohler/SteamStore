@@ -9,7 +9,7 @@ namespace BussinessLogicalLayer.Validates
 {
     public static class Validate
     {
-        public static Response AdValidate( Ad ad)
+        public static Response AdValidate(bool verifyId, Ad ad)
         {
             Response response = new Response();
 
@@ -26,6 +26,11 @@ namespace BussinessLogicalLayer.Validates
             if (ad.IsSold)
             {
                 response.Erros.Add(new Error { Proprety = "IsSold", Message = "O anuncio não pode ser criado como vendido" });
+            }
+
+            if (verifyId && ad.ID == null)
+            {
+                response.Erros.Add(new Error { Proprety = "ID", Message = "ID invalido" });
             }
 
             return response;
