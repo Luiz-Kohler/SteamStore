@@ -1,4 +1,6 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
@@ -10,34 +12,64 @@ namespace BussinessLogicalLayer.Services
 {
     public class FriendRequestService : IFriendRequestService
     {
-        public Task<Response> Creat(FriendRequest objectToCreat)
+        private readonly IFriendRequestRepository _repository;
+
+        public FriendRequestService(IFriendRequestRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Creat(FriendRequest objectToCreat)
         {
-            throw new NotImplementedException();
+            Response response = Validate.FriendRequestValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat);
         }
 
-        public Task<DataResponse<FriendRequest>> GetAllObjects()
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if (objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<FriendRequest>> GetFriedsRequestByUserID(Guid userID)
+        public async Task<DataResponse<FriendRequest>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllObjects();
         }
 
-        public Task<DataResponse<FriendRequest>> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<FriendRequest>> GetFriedsRequestByUserID(Guid userID)
         {
-            throw new NotImplementedException();
+            DataResponse<FriendRequest> response = new DataResponse<FriendRequest>();
+
+            if (userID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetFriedsRequestByUserID(userID);
         }
 
-        public Task<Response> Update(FriendRequest objectToUpdate)
+        public async Task<DataResponse<FriendRequest>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<FriendRequest> response = new DataResponse<FriendRequest>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
+        }
+
+        public async Task<Response> Update(FriendRequest objectToUpdate)
+        {
+            Response response = Validate.FriendRequestValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }
