@@ -24,7 +24,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             DataResponse<User> dataResponse = new DataResponse<User>();
             try
             {
-                dataResponse.Data.Add(await _context.Users.FirstOrDefaultAsync(x => x.Login.Email.Equals(email, StringComparison.OrdinalIgnoreCase) && x.Login.Password.Equals(password));
+                dataResponse.Data.Add(await _context.Users.FirstOrDefaultAsync(x => x.Login.Email.Equals(email, StringComparison.OrdinalIgnoreCase) && x.Login.Password.Equals(password)));
             }
             catch (Exception)
             {
