@@ -19,6 +19,21 @@ namespace DataAccessLayer.SteamStore.Repositories
             _context = context;
         }
 
+        public async Task<DataResponse<User>> Authetication(string email, string password)
+        {
+            DataResponse<User> dataResponse = new DataResponse<User>();
+            try
+            {
+                dataResponse.Data.Add(await _context.Users.FirstOrDefaultAsync(x => x.Login.Email.Equals(email, StringComparison.OrdinalIgnoreCase) && x.Login.Password.Equals(password));
+            }
+            catch (Exception)
+            {
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+            }
+            return dataResponse;
+        }
+
         public async Task<Response> Creat(User objectToCreat)
         {
             Response response = new Response();
