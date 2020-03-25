@@ -1,48 +1,98 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BussinessLogicalLayer.Services
 {
     public class FriendService : IFriendService
     {
-        public Task<Response> Creat(Friend objectToCreat)
+        private readonly IFriendRepository _repository;
+
+        public FriendService(IFriendRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Creat(Friend objectToCreat)
         {
-            throw new NotImplementedException();
+            Response response = Validate.FriendValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat);
         }
 
-        public Task<DataResponse<Friend>> GetAllObjects()
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if (objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<Friend>> GetFriendsByUserID(Guid userID)
+        public async Task<DataResponse<Friend>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllObjects();
         }
 
-        public Task<DataResponse<Friend>> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Friend>> GetFriendsByUserID(Guid userID)
         {
-            throw new NotImplementedException();
+            DataResponse<Friend> response = new DataResponse<Friend>();
+
+            if (userID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetFriendsByUserID(userID);
         }
 
-        public Task<DataResponse<Friend>> GetObjectByName(string name)
+        public async Task<DataResponse<Friend>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<Friend> response = new DataResponse<Friend>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
         }
 
-        public Task<Response> Update(Friend objectToUpdate)
+        public async Task<DataResponse<Friend>> GetObjectByName(string name)
         {
-            throw new NotImplementedException();
+            DataResponse<Friend> response = new DataResponse<Friend>();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                response.AddError("Name", "O nome deve ser informado");
+            }
+            else
+            {
+                name = name.ToLower().Trim();
+                name = Regex.Replace(name, @"\s+", " ");
+
+                if(name.Length < 2 && name.Length > 20)
+                {
+                    response.AddError("Name", "O nome deve conter entre 2 a 20 caracteres");
+                }
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByName(name);
+        }
+
+        public async Task<Response> Update(Friend objectToUpdate)
+        {
+            Response response = Validate.FriendValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }
