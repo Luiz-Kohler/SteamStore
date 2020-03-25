@@ -1,43 +1,86 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BussinessLogicalLayer.Services
 {
     public class UserService : IUserService
     {
-        public Task<Response> Creat(User objectToCreat)
+        private readonly IUserRepository _repository;
+
+        public UserService(IUserRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Creat(User objectToCreat)
         {
-            throw new NotImplementedException();
+            Response response = Validate.UserValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat);
         }
 
-        public Task<DataResponse<User>> GetAllObjects()
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if (objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<User>> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<User>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllObjects();
         }
 
-        public Task<DataResponse<User>> GetObjectByName(string name)
+        public async Task<DataResponse<User>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<User> response = new DataResponse<User>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
         }
 
-        public Task<Response> Update(User objectToUpdate)
+        public async Task<DataResponse<User>> GetObjectByName(string name)
         {
-            throw new NotImplementedException();
+            DataResponse<User> response = new DataResponse<User>();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                response.AddError("Name", "O nome deve ser informado");
+            }
+            else
+            {
+                name = name.ToLower().Trim();
+                name = Regex.Replace(name, @"\s+", " ");
+
+                if (name.Length < 2 && name.Length > 20)
+                {
+                    response.AddError("Name", "O nome deve conter entre 2 a 20 caracteres");
+                }
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByName(name);
+        }
+
+        public async Task<Response> Update(User objectToUpdate)
+        {
+            Response response = Validate.SaleValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }
