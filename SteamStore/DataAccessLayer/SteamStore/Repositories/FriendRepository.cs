@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
+using log4net;
 using Microsoft.EntityFrameworkCore;
 using Shared.Responses;
 using System;
@@ -13,6 +14,7 @@ namespace DataAccessLayer.SteamStore.Repositories
     public class FriendRepository : IFriendRepository
     {
         private SteamStoreContext _context;
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public FriendRepository(SteamStoreContext context)
         {
@@ -28,10 +30,13 @@ namespace DataAccessLayer.SteamStore.Repositories
                 _context.Entry<Friend>(objectToCreat).State = Microsoft.EntityFrameworkCore.EntityState.Added;
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
         }
@@ -53,10 +58,13 @@ namespace DataAccessLayer.SteamStore.Repositories
                 friendToDisable.Data[0].ChangeState(false);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
         }
@@ -68,10 +76,13 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 dataResponse.Data =  await _context.Friends.Where(f => f.IsActive).ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
         }
@@ -83,10 +94,13 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 dataResponse.Data = await _context.Friends.Where(f => f.UserID == userID && f.IsActive).ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
         }
@@ -98,10 +112,13 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 dataResponse.Data.Add(await _context.Friends.FirstOrDefaultAsync(f => f.ID == objectToGetID));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
         }
@@ -113,10 +130,13 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 dataResponse.Data = await _context.Friends.Where(f => f.FriendUser.Nick.Equals(name, StringComparison.OrdinalIgnoreCase) && f.IsActive).ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
         }
@@ -129,10 +149,13 @@ namespace DataAccessLayer.SteamStore.Repositories
                 _context.Entry<Friend>(objectToUpdate).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
         }

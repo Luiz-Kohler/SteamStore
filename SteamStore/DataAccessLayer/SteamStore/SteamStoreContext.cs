@@ -36,8 +36,8 @@ namespace DataAccessLayer.SteamStore
                     x => x.Login,
                     login =>
                     {
-                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email");
-                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password");
+                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email").IsUnicode(false);
+                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password").IsUnicode(false);
                     });
             });
 
@@ -47,8 +47,8 @@ namespace DataAccessLayer.SteamStore
                     x => x.Login,
                     login =>
                     {
-                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email");
-                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password");
+                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email").IsUnicode(false);
+                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password").IsUnicode(false);
                     });
             });
 
