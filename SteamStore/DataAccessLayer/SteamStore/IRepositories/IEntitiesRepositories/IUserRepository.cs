@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
 {
-    public interface IUserRepository : ICrudRepository<User>, IBaseSearchRepository<User>, ISearchByNameRepository<User>
+    public interface IUserRepository : ICrudRepository<User>, IBaseSearchRepository<User>, ISearchByNameRepository<User>, IAuthentication<User>
     {
     }
 }
