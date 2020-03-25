@@ -9,7 +9,7 @@ namespace BussinessLogicalLayer.Validates
 {
     public class AdValidate : IBaseValidate<Ad>
     {
-        public IReadOnlyCollection<Response> ValidateObject(Ad objectToValidate)
+        public Response ValidateObject(Ad objectToValidate)
         {
             throw new NotImplementedException();
         }

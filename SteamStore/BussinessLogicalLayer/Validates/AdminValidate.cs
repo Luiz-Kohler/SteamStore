@@ -9,10 +9,10 @@ namespace BussinessLogicalLayer.Validates
 {
     class AdminValidate : IBaseValidate<Admin>
     {
-        public IReadOnlyCollection<Response> ValidateObject(Admin objectToValidate)
+        public Response ValidateObject(Admin objectToValidate)
         {
             throw new NotImplementedException();
         }
     }
 }
-}
+

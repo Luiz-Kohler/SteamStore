@@ -9,9 +9,6 @@ namespace BussinessLogicalLayer.Validates
 {
     public class CommentValidate : IBaseValidate<Comment>
     {
-        public IReadOnlyCollection<Response> ValidateObject(Comment objectToValidate)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
