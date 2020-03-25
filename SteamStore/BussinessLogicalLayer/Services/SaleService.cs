@@ -1,4 +1,6 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
@@ -10,34 +12,71 @@ namespace BussinessLogicalLayer.Services
 {
     public class SaleService : ISaleService
     {
-        public Task<Response> Creat(Sale objectToCreat)
+        private readonly ISaleRepository _repository;
+
+        public SaleService(ISaleRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Creat(Sale objectToCreat)
         {
-            throw new NotImplementedException();
+            Response response = Validate.SaleValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat);
         }
 
-        public Task<DataResponse<Sale>> GetObjectByID(Guid objectToGetID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if (objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<Sale>> GetSaleByAd(Guid adID)
+        public async Task<DataResponse<Sale>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<Sale> response = new DataResponse<Sale>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
         }
 
-        public Task<DataResponse<Sale>> GetSalesByBuyerID(Guid buyerID)
+        public async Task<DataResponse<Sale>> GetSaleByAd(Guid adID)
         {
-            throw new NotImplementedException();
+            DataResponse<Sale> response = new DataResponse<Sale>();
+
+            if (adID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetSaleByAd(adID);
         }
 
-        public Task<Response> Update(Sale objectToUpdate)
+        public async Task<DataResponse<Sale>> GetSalesByBuyerID(Guid buyerID)
         {
-            throw new NotImplementedException();
+            DataResponse<Sale> response = new DataResponse<Sale>();
+
+            if (buyerID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetSalesByBuyerID(buyerID);
+        }
+
+        public async Task<Response> Update(Sale objectToUpdate)
+        {
+            Response response = Validate.SaleValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }
