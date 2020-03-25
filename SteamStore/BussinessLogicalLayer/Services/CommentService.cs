@@ -1,4 +1,6 @@
 ﻿using BussinessLogicalLayer.IServices;
+using BussinessLogicalLayer.Validates;
+using DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories;
 using Entities.Entities;
 using Shared.Responses;
 using System;
@@ -10,39 +12,74 @@ namespace BussinessLogicalLayer.Services
 {
     public class CommentService : ICommentService
     {
-        public Task<Response> Creat(Comment objectToCreat)
+        private readonly ICommentRepository _repository;
+        public CommentService(ICommentRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+        public async Task<Response> Creat(Comment objectToCreat)
+        {
+            Response response = Validate.CommentValidate(false, objectToCreat);
+            return response.HasError() ? response : await _repository.Creat(objectToCreat);
         }
 
-        public Task<Response> Disable(Guid objectToDisableID)
+        public async Task<Response> Disable(Guid objectToDisableID)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+
+            if (objectToDisableID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.Disable(objectToDisableID);
         }
 
-        public Task<DataResponse<Comment>> GetAllObjects()
+        public async Task<DataResponse<Comment>> GetAllObjects()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllObjects();
         }
 
-        public Task<DataResponse<Comment>> GetCommentsByForUserID(Guid forUserID)
+        public async Task<DataResponse<Comment>> GetCommentsByForUserID(Guid forUserID)
         {
-            throw new NotImplementedException();
+            DataResponse<Comment> response = new DataResponse<Comment>();
+
+            if (forUserID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetCommentsByForUserID(forUserID);
         }
 
-        public Task<DataResponse<Comment>> GetCommentsByWritterID(Guid writterID)
+        public async Task<DataResponse<Comment>> GetCommentsByWritterID(Guid writterID)
         {
-            throw new NotImplementedException();
+            DataResponse<Comment> response = new DataResponse<Comment>();
+
+            if (writterID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetCommentsByWritterID(writterID);
         }
 
-        public Task<DataResponse<Comment>> GetObjectByID(Guid objectToGetID)
+        public async Task<DataResponse<Comment>> GetObjectByID(Guid objectToGetID)
         {
-            throw new NotImplementedException();
+            DataResponse<Comment> response = new DataResponse<Comment>();
+
+            if (objectToGetID == null)
+            {
+                response.AddError("ID", "ID invalido");
+            }
+
+            return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
         }
 
-        public Task<Response> Update(Comment objectToUpdate)
+        public async Task<Response> Update(Comment objectToUpdate)
         {
-            throw new NotImplementedException();
+            Response response = Validate.CommentValidate(true, objectToUpdate);
+            return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
 }
