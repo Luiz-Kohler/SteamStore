@@ -79,7 +79,7 @@ namespace BussinessLogicalLayer.Services
 
         public async Task<Response> Update(User objectToUpdate)
         {
-            Response response = Validate.SaleValidate(true, objectToUpdate);
+            Response response = Validate.UserValidate(true, objectToUpdate);
             return response.HasError() ? response : await _repository.Update(objectToUpdate);
         }
     }
