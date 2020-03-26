@@ -85,6 +85,18 @@ namespace BussinessLogicalLayer.Services
             return response.HasError() ? response : await _repository.GetObjectByName(name);
         }
 
+        public  async Task<DataResponse<User>> GetUserByIdForProfile(Guid userID, bool owenr)
+        {
+            DataResponse<User> dataResponse = new DataResponse<User>();
+            
+            if(userID == null)
+            {
+                dataResponse.AddError("userID", "ID invalido");
+            }
+
+            return dataResponse.HasError() ? dataResponse : await _repository.GetUserByIdForProfile(userID, owenr);
+        }
+
         public async Task<Response> Update(User objectToUpdate)
         {
             Response response = Validate.UserValidate(true, objectToUpdate);
