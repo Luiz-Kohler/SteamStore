@@ -32,7 +32,6 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception ex)
             {
-                data
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
@@ -137,7 +136,6 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             catch (Exception ex)
             {
-                data
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
@@ -201,9 +199,10 @@ namespace DataAccessLayer.SteamStore.Repositories
                     {
                         users.Data[0].ChangeCash(price, true);
                         users.Data[1].ChangeCash(price, false);
-                        await _context.SaveChangesAsync();
                         return users;
                     }
+
+                    throw new Exception();
 
                 }
             }
@@ -211,7 +210,6 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
-
                 StringBuilder logMessage = new StringBuilder();
                 logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());

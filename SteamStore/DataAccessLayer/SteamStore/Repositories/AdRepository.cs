@@ -169,12 +169,21 @@ namespace DataAccessLayer.SteamStore.Repositories
                 {
                     DataResponse<Ad> adResponse = await GetObjectByID(AdID);
 
-                    if (adResponse.Success && adResponse.Data.Count > 0)
+                    if (adResponse.Data.Count > 0)
                     {
-                        await _userRepository.ChangeCashValues(adResponse.Data[0].SellerUserID, buyerID, adResponse.Data[0].Price);
-                        await _itemRepository.ChangeOwner(buyerID, adResponse.Data[0].ItemID);
-                        await _saleRepository.Creat(new Sale(buyerID, AdID));
+                        Response ChangeCash =  await _userRepository.ChangeCashValues(adResponse.Data[0].SellerUserID, buyerID, adResponse.Data[0].Price);
+                        Response ChangeOwnerItem = await _itemRepository.ChangeOwner(buyerID, adResponse.Data[0].ItemID);
+                        Response CreatSale = await _saleRepository.Creat(new Sale(buyerID, AdID));
+
+                        if(ChangeCash.Success && ChangeOwnerItem.Success && CreatSale.Success)
+                        {
+                            await _context.SaveChangesAsync();
+                            return response;
+                        }
                     }
+
+                    throw new Exception();
+
                 }
             }
             catch (Exception ex)

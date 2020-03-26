@@ -181,7 +181,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 if(itemToChange != null)
                 {
                     itemToChange.ChangeOwner(newUserOwnerID);
-                    return response = await Update(itemToChange);
+                    return response;
                 }
 
                 response.AddError("itemID", "ID invalido");
