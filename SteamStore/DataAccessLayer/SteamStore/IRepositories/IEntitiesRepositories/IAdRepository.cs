@@ -12,5 +12,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
     public interface IAdRepository : ICrudRepository<Ad>, IBaseSearchRepository<Ad>
     {
         Task<DataResponse<Ad>> GetAdsForID(Guid SellerID);
+        Task<Response> SellItem(Guid AdID, Guid buyerID);
     }
 }

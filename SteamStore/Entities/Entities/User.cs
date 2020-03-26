@@ -56,9 +56,12 @@ namespace Entities.Entities
         public virtual IReadOnlyCollection<FriendRequest> MyFriendRequest { get { return _myFriendRequest.ToList(); } }
         public virtual IReadOnlyCollection<FriendRequest> ForMeFriendRequest { get { return _forMeFriendRequest.ToList(); } }
 
-        public void InsertCash(decimal cash)
+        public void ChangeCash(decimal cash, bool addCash)
         {
-            this.Cash = cash;
+            if (cash > 0)
+            {
+                this.Cash = addCash ? this.Cash += cash : this.Cash -= cash;
+            }
         }
 
         public void ChangeNick(string nick)

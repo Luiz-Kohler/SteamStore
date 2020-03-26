@@ -9,17 +9,26 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace DataAccessLayer.SteamStore.Repositories
 {
     public class AdRepository : IAdRepository
     {
         private SteamStoreContext _context;
+        private readonly IUserRepository _userRepository;
+        private readonly ISaleRepository _saleRepository;
+        private readonly IItemRepository _itemRepository;
+
+
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public AdRepository(SteamStoreContext context)
+        public AdRepository(SteamStoreContext context, IUserRepository userRepository, ISaleRepository saleRepository, IItemRepository itemRepository)
         {
             _context = context;
+            _userRepository = userRepository;
+            _saleRepository = saleRepository;
+            _itemRepository = itemRepository;
         }
 
         public async Task<Response> Creat(Ad objectToCreat)
@@ -138,6 +147,41 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 _context.Entry<Ad>(objectToUpdate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
+            }
+            return response;
+        }
+
+        public async Task<Response> SellItem(Guid AdID, Guid buyerID)
+        {
+            Response response = new Response();
+            try
+            {
+                using (TransactionScope scope = new TransactionScope()) {
+
+                    DataResponse<Ad> adDataResponse = await GetObjectByID(AdID);
+                    DataResponse<User> userBuyerDataResponse = await _userRepository.GetObjectByID(buyerID);
+
+                    if (adDataResponse.Data.Count > 0 && userBuyerDataResponse.Data.Count > 0)
+                    {
+                        Sale saleToCreat = new Sale(buyerID, AdID);
+                        await _saleRepository.Creat(saleToCreat);
+
+                        DataResponse<User> userSellerDataResponse = await _userRepository.GetObjectByID(adDataResponse.Data[0].SellerUserID);
+
+                        userBuyerDataResponse.Data[0].ChangeCash(adDataResponse.Data[0].Price, false);
+
+                    }
+
+                }
             }
             catch (Exception ex)
             {
