@@ -24,6 +24,8 @@ namespace DataAccessLayer.SteamStore.Mappings
                     .HasForeignKey<Sale>(s => s.AdId)
                     .IsRequired(false);
 
+            builder.HasKey(x => x.ID);
+
             builder.Property(a => a.ItemID).IsRequired(true);
 
             builder.Property(a => a.SaleID).IsRequired(false);

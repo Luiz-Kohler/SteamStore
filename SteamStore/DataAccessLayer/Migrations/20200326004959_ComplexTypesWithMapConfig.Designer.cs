@@ -4,14 +4,16 @@ using DataAccessLayer.SteamStore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(SteamStoreContext))]
-    partial class SteamStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200326004959_ComplexTypesWithMapConfig")]
+    partial class ComplexTypesWithMapConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,16 +274,16 @@ namespace DataAccessLayer.Migrations
                             b1.Property<string>("Email")
                                 .IsRequired()
                                 .HasColumnName("Email")
-                                .HasColumnType("varchar(60)")
+                                .HasColumnType("nvarchar(60)")
                                 .HasMaxLength(60)
-                                .IsUnicode(false);
+                                .IsUnicode(true);
 
                             b1.Property<string>("Password")
                                 .IsRequired()
                                 .HasColumnName("Password")
-                                .HasColumnType("varchar(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasMaxLength(100)
-                                .IsUnicode(false);
+                                .IsUnicode(true);
 
                             b1.HasKey("AdminID");
 
@@ -365,16 +367,16 @@ namespace DataAccessLayer.Migrations
                             b1.Property<string>("Email")
                                 .IsRequired()
                                 .HasColumnName("Email")
-                                .HasColumnType("varchar(60)")
+                                .HasColumnType("nvarchar(60)")
                                 .HasMaxLength(60)
-                                .IsUnicode(false);
+                                .IsUnicode(true);
 
                             b1.Property<string>("Password")
                                 .IsRequired()
                                 .HasColumnName("Password")
-                                .HasColumnType("varchar(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasMaxLength(100)
-                                .IsUnicode(false);
+                                .IsUnicode(true);
 
                             b1.HasKey("UserID");
 

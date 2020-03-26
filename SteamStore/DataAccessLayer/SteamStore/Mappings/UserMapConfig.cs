@@ -52,8 +52,13 @@ namespace DataAccessLayer.SteamStore.Mappings
                    .WithOne(f => f.User)
                    .HasForeignKey(f => f.UserID);
 
+            builder.HasKey(x => x.ID);
+
             builder.Property(u => u.Nick).IsRequired(true).IsUnicode(false).HasMaxLength(20);
             builder.HasIndex(u => u.Nick).IsUnique(false);
+
+            
+
         }
     }
 }

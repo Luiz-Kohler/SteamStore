@@ -29,15 +29,15 @@ namespace DataAccessLayer.SteamStore
             //Using every mappings in this assembly for creat the database.
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-
             modelBuilder.Entity<User>(table =>
             {
                 table.OwnsOne(
                     x => x.Login,
-                    login =>
+                    address =>
                     {
-                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email").IsUnicode(false);
-                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password").IsUnicode(false);
+                        address.Property(x => x.Password).HasColumnName("Password").IsRequired().IsUnicode(false).HasMaxLength(100);
+                        address.Property(x => x.Email).HasColumnName("Email").IsRequired().IsUnicode(false).HasMaxLength(60);
+
                     });
             });
 
@@ -45,10 +45,11 @@ namespace DataAccessLayer.SteamStore
             {
                 table.OwnsOne(
                     x => x.Login,
-                    login =>
+                    address =>
                     {
-                        login.Property(x => x.Email).IsRequired(true).HasColumnName("Email").IsUnicode(false);
-                        login.Property(x => x.Password).IsRequired(true).HasColumnName("Password").IsUnicode(false);
+                        address.Property(x => x.Password).HasColumnName("Password").IsRequired(true).IsUnicode(false).HasMaxLength(100);
+                        address.Property(x => x.Email).HasColumnName("Email").IsRequired(true).IsUnicode(false).HasMaxLength(60);
+
                     });
             });
 

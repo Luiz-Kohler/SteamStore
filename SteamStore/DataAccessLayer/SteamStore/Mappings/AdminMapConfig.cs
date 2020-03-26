@@ -11,8 +11,11 @@ namespace DataAccessLayer.SteamStore.Mappings
     {
         public void Configure(EntityTypeBuilder<Admin> builder)
         {
+            builder.HasKey(x => x.ID);
+
             builder.Property(a => a.BornDate).IsRequired(true);
             builder.Property(a => a.Name).IsRequired(true).IsUnicode(false).HasMaxLength(60);
+
         }
     }
 }

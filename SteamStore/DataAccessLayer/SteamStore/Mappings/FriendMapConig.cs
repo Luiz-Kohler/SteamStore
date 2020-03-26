@@ -14,6 +14,9 @@ namespace DataAccessLayer.SteamStore.Mappings
             builder.HasOne(f => f.User)
                    .WithMany(u => u.Friends)
                    .HasForeignKey(u => u.UserID);
+
+            builder.HasKey(x => x.ID);
+
         }
     }
 }

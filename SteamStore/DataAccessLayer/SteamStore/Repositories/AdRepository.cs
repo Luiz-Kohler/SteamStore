@@ -96,7 +96,7 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 dataResponse.Data = await _context.Ads.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");

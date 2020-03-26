@@ -18,6 +18,8 @@ namespace DataAccessLayer.SteamStore.Mappings
                    .HasForeignKey(u => u.UserID)
                    .IsRequired();
 
+            builder.HasKey(x => x.ID);
+            
             builder.Property(i => i.Name).IsRequired(true).IsUnicode(false).HasMaxLength(60);
 
             builder.Property(i => i.UserID).IsRequired();

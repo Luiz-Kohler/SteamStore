@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BussinessLogicalLayer\BussinessLogicalLayer.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Tests\Tests.csproj" />
   </ItemGroup>
 
 

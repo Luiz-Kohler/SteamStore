@@ -27,6 +27,8 @@ namespace DataAccessLayer.SteamStore.Mappings
 
             builder.Property(s => s.BuyerId).IsRequired(true);
 
+            builder.HasKey(x => x.ID);
+
         }
     }
 }

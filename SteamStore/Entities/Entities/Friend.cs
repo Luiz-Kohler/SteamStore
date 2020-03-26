@@ -19,9 +19,9 @@ namespace Entities.Entities
         }
 
         public Guid UserID { get; private set; }
-        public User User { get; private set; }
+        public virtual User User { get; private set; }
         public Guid FriendUserID { get; private set; }
-        public User FriendUser { get; private set; }
+        public virtual User FriendUser { get; private set; }
 
         public void GetUser(User user)
         {
