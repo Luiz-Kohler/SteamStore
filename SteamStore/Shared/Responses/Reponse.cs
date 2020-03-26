@@ -18,6 +18,7 @@ namespace Shared.Responses
         public void AddError(string proprety, string message)
         {
             Erros.Add(new Error { Message = message, Proprety = proprety });
+            this.Success = false;
         }
 
         public void ChangeStateSuccess(bool success)

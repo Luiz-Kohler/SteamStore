@@ -167,8 +167,14 @@ namespace DataAccessLayer.SteamStore.Repositories
             {
                 using (TransactionScope scope = new TransactionScope()) 
                 {
+                    DataResponse<Ad> adResponse = await GetObjectByID(AdID);
 
-
+                    if (adResponse.Success && adResponse.Data.Count > 0)
+                    {
+                        await _userRepository.ChangeCashValues(adResponse.Data[0].SellerUserID, buyerID, adResponse.Data[0].Price);
+                        await _itemRepository.ChangeOwner(buyerID, adResponse.Data[0].ItemID);
+                        await _saleRepository.Creat(new Sale(buyerID, AdID));
+                    }
                 }
             }
             catch (Exception ex)
