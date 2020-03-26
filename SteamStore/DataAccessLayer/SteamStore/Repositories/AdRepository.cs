@@ -165,27 +165,14 @@ namespace DataAccessLayer.SteamStore.Repositories
             Response response = new Response();
             try
             {
-                using (TransactionScope scope = new TransactionScope()) {
+                using (TransactionScope scope = new TransactionScope()) 
+                {
 
-                    DataResponse<Ad> adDataResponse = await GetObjectByID(AdID);
-                    DataResponse<User> userBuyerDataResponse = await _userRepository.GetObjectByID(buyerID);
-
-                    if (adDataResponse.Data.Count > 0 && userBuyerDataResponse.Data.Count > 0)
-                    {
-                        Sale saleToCreat = new Sale(buyerID, AdID);
-                        await _saleRepository.Creat(saleToCreat);
-
-                        DataResponse<User> userSellerDataResponse = await _userRepository.GetObjectByID(adDataResponse.Data[0].SellerUserID);
-
-                        userBuyerDataResponse.Data[0].ChangeCash(adDataResponse.Data[0].Price, false);
-
-                    }
 
                 }
             }
             catch (Exception ex)
             {
-                response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
