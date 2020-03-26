@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace DataAccessLayer.SteamStore.Repositories
 {
@@ -188,6 +189,37 @@ namespace DataAccessLayer.SteamStore.Repositories
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
+        }
+
+        public async Task<Response> ChangeCashValues(Guid userReceiveCashID, Guid userGiveCashID, decimal price)
+        {
+            Response response = new Response();
+            try
+            {
+                using(TransactionScope scope = new TransactionScope())
+                {
+                    DataResponse<User> users = await GetObjectByID(userReceiveCashID);
+                    users.Data.Add(GetObjectByID(userGiveCashID).Result.Data[0]);
+
+                    if (users.Success)
+                    {
+                        users.Data[0].ChangeCash(price, true);
+                        users.Data[1].ChangeCash(price, false);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
+            }
+            return response;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
     public interface IUserRepository : ICrudRepository<User>, IBaseSearchRepository<User>, ISearchByNameRepository<User>, IAuthentication<User>
     {
         Task<DataResponse<User>> GetUserByIdForProfile(Guid userID, bool owenr);
-        Task<Response> ChangeCashValues(Guid userReceiveCashID, Guid userGiveCashID);
+        Task<Response> ChangeCashValues(Guid userReceiveCashID, Guid userGiveCashID, decimal price);
 
 
     }
