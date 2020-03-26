@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace DataAccessLayer.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(unicode: false, maxLength: 60, nullable: false),
-                    Login_Email = table.Column<string>(nullable: true),
-                    Login_Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(unicode: false, maxLength: 60, nullable: false),
+                    Password = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
                     BornDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +30,8 @@ namespace DataAccessLayer.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
                     Nick = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
-                    Login_Email = table.Column<string>(nullable: true),
-                    Login_Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(unicode: false, maxLength: 60, nullable: false),
+                    Password = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
                     BornDate = table.Column<DateTime>(nullable: false),
                     Cash = table.Column<decimal>(nullable: false)
                 },
@@ -169,8 +169,7 @@ namespace DataAccessLayer.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     DateAd = table.Column<DateTime>(nullable: false),
-                    ItemID = table.Column<int>(nullable: false),
-                    ItemID1 = table.Column<Guid>(nullable: true),
+                    ItemID = table.Column<Guid>(nullable: false),
                     SellerUserID = table.Column<Guid>(nullable: false),
                     SaleID = table.Column<Guid>(nullable: true),
                     IsSold = table.Column<bool>(nullable: false)
@@ -179,11 +178,11 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_Ads", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Ads_Items_ItemID1",
-                        column: x => x.ItemID1,
+                        name: "FK_Ads_Items_ItemID",
+                        column: x => x.ItemID,
                         principalTable: "Items",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Ads_Sales_SaleID",
                         column: x => x.SaleID,
@@ -199,9 +198,9 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ads_ItemID1",
+                name: "IX_Ads_ItemID",
                 table: "Ads",
-                column: "ItemID1");
+                column: "ItemID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_SaleID",

@@ -28,6 +28,8 @@ namespace DataAccessLayer.SteamStore.Mappings
 
             builder.Property(a => a.ItemID).IsRequired(true);
 
+            builder.Property(a => a.Price).HasColumnType("float");
+
             builder.Property(a => a.SaleID).IsRequired(false);
 
             builder.Property(a => a.SellerUserID).IsRequired(true);

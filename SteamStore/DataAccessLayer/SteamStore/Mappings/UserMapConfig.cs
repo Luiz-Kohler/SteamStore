@@ -54,6 +54,8 @@ namespace DataAccessLayer.SteamStore.Mappings
 
             builder.HasKey(x => x.ID);
 
+            builder.Property(u => u.Cash).HasColumnType("float");
+
             builder.Property(u => u.Nick).IsRequired(true).IsUnicode(false).HasMaxLength(20);
             builder.HasIndex(u => u.Nick).IsUnique(false);
 

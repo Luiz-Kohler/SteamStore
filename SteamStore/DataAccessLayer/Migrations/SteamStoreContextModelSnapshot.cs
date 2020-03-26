@@ -37,8 +37,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<Guid>("ItemID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<Guid?>("SaleID")
                         .HasColumnType("uniqueidentifier");
@@ -222,8 +222,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("BornDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Cash")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Cash")
+                        .HasColumnType("float");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");

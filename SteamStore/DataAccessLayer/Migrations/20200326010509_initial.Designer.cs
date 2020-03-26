@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(SteamStoreContext))]
-    [Migration("20200324021058_teste")]
-    partial class teste
+    [Migration("20200326010509_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -274,12 +274,16 @@ namespace DataAccessLayer.Migrations
                             b1.Property<string>("Email")
                                 .IsRequired()
                                 .HasColumnName("Email")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("varchar(60)")
+                                .HasMaxLength(60)
+                                .IsUnicode(false);
 
                             b1.Property<string>("Password")
                                 .IsRequired()
                                 .HasColumnName("Password")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("varchar(100)")
+                                .HasMaxLength(100)
+                                .IsUnicode(false);
 
                             b1.HasKey("AdminID");
 
@@ -363,12 +367,16 @@ namespace DataAccessLayer.Migrations
                             b1.Property<string>("Email")
                                 .IsRequired()
                                 .HasColumnName("Email")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("varchar(60)")
+                                .HasMaxLength(60)
+                                .IsUnicode(false);
 
                             b1.Property<string>("Password")
                                 .IsRequired()
                                 .HasColumnName("Password")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("varchar(100)")
+                                .HasMaxLength(100)
+                                .IsUnicode(false);
 
                             b1.HasKey("UserID");
 
