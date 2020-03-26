@@ -12,5 +12,6 @@ namespace DataAccessLayer.SteamStore.IRepositories.IEntitiesRepositories
     public interface IItemRepository : ICrudRepository<Item>, IBaseSearchRepository<Item>, ISearchByNameRepository<Item>
     {
         Task<DataResponse<Item>> GetItemsUserID(Guid userID);
+        Task<Response> ChangeOwner(Guid newUserOwnerID, Guid itemID);
     }
 }

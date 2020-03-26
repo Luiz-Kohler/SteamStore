@@ -170,5 +170,33 @@ namespace DataAccessLayer.SteamStore.Repositories
             }
             return response;
         }
+
+        public async Task<Response> ChangeOwner(Guid newUserOwnerID, Guid itemID)
+        {
+            Response response = new Response();
+            try
+            {
+                Item itemToChange = GetObjectByID(itemID).Result.Data[0];
+
+                if(itemToChange != null)
+                {
+                    itemToChange.ChangeOwner(newUserOwnerID);
+                    return response = await Update(itemToChange);
+                }
+
+                response.AddError("itemID", "ID invalido");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
+                return response;
+            }
+        }
     }
 }

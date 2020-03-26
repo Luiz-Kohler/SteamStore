@@ -35,5 +35,10 @@ namespace Entities.Entities
 
             this.Name = name;
         }
+
+        public void ChangeOwner(Guid newUserOwnerID)
+        {
+            this.UserID = newUserOwnerID;
+        }
     }
 }
