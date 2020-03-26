@@ -35,6 +35,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -55,6 +56,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
@@ -82,7 +84,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder(); logMessage.Append(DateTime.Now.ToString());
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
@@ -101,6 +104,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -120,6 +124,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -138,6 +143,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -157,9 +163,31 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
+        }
+
+        public async Task<DataResponse<User>> GetUserByIdForProfile(Guid userID, bool owenr)
+        {
+            DataResponse<User> dataResponse = new DataResponse<User>();
+            try
+            {
+                dataResponse.Data.Add(owenr ? await _context.Users.Include(u => u.Items).Include(u => u.Ads).Include(u => u.Sales).FirstOrDefaultAsync(u => u.ID == userID)
+                                            : await _context.Users.Include(u => u.Items).FirstOrDefaultAsync(u => u.ID == userID));
+
+            }
+            catch (Exception ex)
+            {
+                dataResponse.Success = false;
+                dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
+
+                StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
+                log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
+            }
+            return dataResponse;
         }
     }
 }

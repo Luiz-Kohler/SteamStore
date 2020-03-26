@@ -37,6 +37,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
@@ -64,7 +65,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder(); 
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
@@ -82,7 +84,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder(); 
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -102,6 +105,7 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
                 StringBuilder logMessage = new StringBuilder();
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -119,7 +123,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder();  
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -138,7 +143,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 dataResponse.Success = false;
                 dataResponse.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder(); 
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return dataResponse;
@@ -157,7 +163,8 @@ namespace DataAccessLayer.SteamStore.Repositories
                 response.Success = false;
                 response.AddError("Banco de dados", "Error no banco de dados, contate um suporte");
 
-                StringBuilder logMessage = new StringBuilder();
+                StringBuilder logMessage = new StringBuilder();  
+                logMessage.Append(DateTime.Now.ToString());
                 log.Error(logMessage.AppendLine(ex.Message).AppendLine(ex.StackTrace).ToString());
             }
             return response;
