@@ -28,6 +28,11 @@ namespace BussinessLogicalLayer.Services
             return dataResponse.HasError() ? dataResponse : await _repository.Authetication(email, password);
         }
 
+        public async Task<Response> ChangeCashValues(Guid userReceiveCashID, Guid userGiveCashID, decimal price)
+        {
+            return await _repository.ChangeCashValues(userReceiveCashID, userGiveCashID, price);
+        }
+
         public async Task<Response> Creat(User objectToCreat)
         {
             Response response = Validate.UserValidate(false, objectToCreat);

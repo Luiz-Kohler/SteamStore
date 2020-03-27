@@ -202,7 +202,6 @@ namespace DataAccessLayer.SteamStore.Repositories
                         return users;
                     }
 
-                    throw new Exception();
 
                 }
             }

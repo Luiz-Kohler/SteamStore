@@ -67,6 +67,11 @@ namespace BussinessLogicalLayer.Services
             return response.HasError() ? response : await _repository.GetObjectByID(objectToGetID);
         }
 
+        public async Task<Response> SellItem(Guid AdID, Guid buyerID)
+        {
+            return await _repository.SellItem(AdID, buyerID);
+        }
+
         public async Task<Response> Update(Ad objectToUpdate)
         {
             Response response = Validate.AdValidate(true, objectToUpdate);

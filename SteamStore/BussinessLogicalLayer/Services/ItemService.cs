@@ -20,6 +20,11 @@ namespace BussinessLogicalLayer.Services
             _repository = repository;
         }
 
+        public async Task<Response> ChangeOwner(Guid newUserOwnerID, Guid itemID)
+        {
+            return await _repository.ChangeOwner(newUserOwnerID, itemID);
+        }
+
         public async Task<Response> Creat(Item objectToCreat)
         {
             Response response = Validate.ItemValidate(false, objectToCreat);
